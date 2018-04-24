@@ -5,6 +5,10 @@ before_install:
 - docker build . -t latex2pdf
 script:
 - docker run -v `pwd`:/source latex2pdf sample.tex
+before_deploy:
+- git config --local user.name "wtjerry"
+- git config --local user.email "wtjerry123@gmail.com"
+- git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
 deploy:
   provider: releases
   api_key:
