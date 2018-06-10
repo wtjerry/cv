@@ -273,6 +273,10 @@
 % Usage: \name{<position>}
 \newcommand*{\position}[1]{\def\@position{#1}}
 
+% Defines writer's birth (optional)
+% Usage: \birth{<birthdate>}
+\newcommand*{\birth}[1]{\def\@birth{#1}}
+
 % Defines writer's mobile (optional)
 % Usage: \mobile{<mobile number>}
 \newcommand*{\mobile}[1]{\def\@mobile{#1}}
@@ -436,11 +440,17 @@
     \headersocialstyle{%
       \newbool{isstart}%
       \setbool{isstart}{true}%
+      \ifthenelse{\isundefined{\@birth}}%
+        {}%
+        {%
+          \faBirthdayCake\acvHeaderIconSep\@birth%
+          \setbool{isstart}{false}%
+        }%
       \ifthenelse{\isundefined{\@mobile}}%
         {}%
         {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
           \faMobile\acvHeaderIconSep\@mobile%
-          \setbool{isstart}{false}%
         }%
       \ifthenelse{\isundefined{\@email}}%
         {}%
@@ -635,6 +645,24 @@
 % Usage: \cvskill{<type>}{<skillset>}
 \newcommand*{\cvskill}[2]{%
 	\skilltypestyle{#1} & \skillsetstyle{#2} \\
+}
+
+% Define an environment for cvreferences
+\newenvironment{cvreferences}{
+    \vspace{\acvSectionContentTopSkip}
+    \vspace{-2.0mm}
+    \begin{center}
+        \setlength\tabcolsep{1ex}
+        \setlength{\extrarowheight}{0pt}
+        \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth * \real{0.4}} L{\textwidth * \real{0.9}}}
+        }{
+        \end{tabular*}
+    \end{center}
+}
+% Define a line of cv information(reference)
+% Usage: \cvreference{<name>}{<phone number / email>}
+\newcommand*{\cvreference}[2]{
+    \skilltypestyle{#1} & \skillsetstyle{#2} \\
 }
 
 % Define an environment for cvitems(for cventry)
