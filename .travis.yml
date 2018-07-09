@@ -4,7 +4,7 @@ services:
 before_install:
 - docker build . -t latex2pdf
 script:
-- docker run -v `pwd`:/source latex2pdf sample.tex
+- docker run -v `pwd`:/source latex2pdf cv.tex
 before_deploy:
 - git config --local user.name "wtjerry"
 - git config --local user.email "wtjerry123@gmail.com"
@@ -13,7 +13,8 @@ deploy:
   provider: releases
   api_key:
     secure: fByqCW2uj68lV4kzwaMg3nezYXT6kpo+fMQgMLIesurSh5YXNn9E3ataky5mrtG7SLc/iMrQOMDE+3DH1QcWZMLSbwtX+9xMyvfHdS+r8fJ7z8XT3hW71K+K666rlwAmh0f1AYptCWgd7ksUgjMUd8cdfGxc+OTy/osa8/IEcgpEMHBV4mrmggdWOv9TeYv6BtzD+iti/ENKIAHf6m9wckfci7k0IXzHvQhTAFpZUB43k+QQNCsF+srr71T3aeWMdshlwCQwFb5bC+f+w0iFwPlK8Eje2j8EgQLY+JMZ2j6gq1wYojdOSU8gzFJ3TAIiy+ULzpQeHDt64bXf+3RcMJH8NLFSYAlha+8hnAOlAkRI0yQ8GSpqLsBuZaKqosQFPrD9tJi9O9vXEtBsRwY5tyeFpr7CphBh9cogAtDbj72d6vcMh8EgOGIT/0mjwhzdY37/Y8NuGGNlt1TcEwO9+ui/ljUNBzCDpbB5Nk+eXsQP1NxOPSXKspoiokZlQnS7H4Vk+ULhMOGG9OE3+3xpRNow4l8jtlH+tKEBqtbYDvnLKuQi8MMANNfIzrqR7+LLELS/eHvAi0JKwWI3XuQ0usIklot+Ok0Jc9hAy705p1+pXhfUCbvHmNJY/9kN74m2qw8FPq54BrnVjq8E8zxWcSapkGtOXqolHVwg4wJceyY=
-  file: sample.pdf
+  file: cv.pdf
   skip_cleanup: true
   on:
+    branch: master
     repo: wtjerry/cv
