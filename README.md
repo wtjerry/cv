@@ -11,7 +11,7 @@ docker build . -t latex2pdf
 ### Create pdf
 
 ``` sh
-docker run -v $(pwd):/source latex2pdf cv.tex
+docker run --rm -v $(pwd):/source latex2pdf cv.tex
 ```
 
 ## travis-ci.org
